@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MovieGo (Demo) </title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <h1>🎫 MovieGo — Booking ticket website</h1>
+    <div class="actions">
+      <button id="themeToggle">Dark</button>
+    </div>
+  </header>
+
+  <main id="app">
+    <!-- Events list -->
+    <section id="eventsView" class="view">
+      <div class="view-header">
+        <div>
+          <p class="eyebrow">Cinema schedule</p>
+          <h2>Now Showing</h2>
+        </div>
+        <span class="results-count" id="resultsCount">0 titles</span>
+      </div>
+      <div class="catalog-layout">
+        <aside class="filters-panel">
+          <div class="filter-block">
+            <h3>Genre</h3>
+            <div id="genreFilterList" class="genre-filter-list"></div>
+          </div>
+          <div class="filter-block">
+            <h3>Date</h3>
+            <input type="date" id="filterDate" aria-label="Filter by date">
+            <button type="button" class="ghost-btn" id="clearDate">Any date</button>
+          </div>
+          <div class="filter-block">
+            <h3>Cinema</h3>
+            <select id="filterCinema"></select>
+          </div>
+          <button type="button" id="resetFilters" class="ghost-btn full">Reset filters</button>
+        </aside>
+        <div class="catalog-results">
+          <div class="events-grid" id="eventsGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Schedule selection -->
+    <section id="scheduleView" class="view hidden">
+      <button class="backBtn" data-back="events">← Back</button>
+      <div class="schedule-hero">
+        <img id="schedulePoster" alt="Selected movie poster" loading="lazy">
+        <div>
+          <p class="seat-tag" id="scheduleGenre"></p>
+          <h2 id="scheduleTitle">Choose cinema & showtime</h2>
+          <p id="scheduleDetail" class="muted"></p>
+        </div>
+      </div>
+      <div id="cinemaList" class="cinema-list"></div>
+      <div class="schedule-actions">
+        <button id="goToSeats" disabled>Continue to seats</button>
+      </div>
+    </section>
+
+    <!-- Seat selection -->
+    <section id="seatsView" class="view hidden">
+      <button class="backBtn" data-back="schedule">← Back</button>
+      <div class="seat-intro">
+        <img id="seatPoster" alt="Selected movie poster">
+        <div>
+          <p class="seat-tag" id="seatTag"></p>
+          <h2 id="seatTitle">Select seats</h2>
+          <p id="seatDetail" class="muted"></p>
+          <p id="seatSchedule" class="muted subtle">Select cinema & showtime to continue</p>
+        </div>
+      </div>
+      <div class="seating-layout">
+        <div class="seating-main">
+          <div class="seat-stage">Screen</div>
+          <div class="seat-map-wrapper">
+            <div id="seatMap" class="seat-map" aria-label="Seat map"></div>
+          </div>
+        </div>
+        <aside class="seating-aside">
+          <div id="legend" class="legend-card">
+            <h3>Legend</h3>
+            <div class="legend-row">
+              <span class="seat seat-legend available"></span>
+              <span>Available</span>
+            </div>
+            <div class="legend-row">
+              <span class="seat seat-legend selected"></span>
+              <span>Selected</span>
+            </div>
+            <div class="legend-row">
+              <span class="seat seat-legend sold"></span>
+              <span>Sold</span>
+            </div>
+          </div>
+          <div class="selection-card">
+            <h3>Your selection</h3>
+            <div id="selectedSeatsList" class="selected-seats"></div>
+            <p id="selectionNotice" class="muted subtle">Pick any seat to begin.</p>
+            <ul class="seat-tips">
+              <li>Tap again to deselect a seat.</li>
+              <li>Move your cursor over seats to see their row and price.</li>
+              <li>Seats lock in once you confirm booking.</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+      <div class="checkoutPanel">
+        <div>Selected: <span id="selectedCount">0</span></div>
+        <div>Total: $<span id="totalPrice">0</span></div>
+        <button id="proceedBtn" disabled>Proceed to Checkout</button>
+      </div>
+    </section>
+
+    <!-- Checkout -->
+    <section id="checkoutView" class="view hidden">
+      <button class="backBtn" data-back="seats">← Back</button>
+      <h2>Checkout</h2>
+      <form id="checkoutForm">
+        <label>Name<input name="name" required></label>
+        <label>Email<input name="email" type="email" required></label>
+        <div class="summary">
+          Booking for <span id="summaryEvent">Aurora Nights</span><br>
+          <strong><span id="summarySeats">0</span> seats • $<span id="summaryTotal">0</span></strong>
+          <p id="summarySchedule" class="muted summary-meta"></p>
+        </div>
+        <p class="muted no-payment">No payment required — this demo instantly reserves your seats.</p>
+        <button type="submit">Confirm Booking</button>
+      </form>
+    </section>
+
+    <!-- Confirmation -->
+    <section id="confirmView" class="view hidden">
+      <h2>Booking Confirmed</h2>
+      <p id="confirmMessage"></p>
+      <button id="doneBtn">Back to events</button>
+    </section>
+  </main>
+  <button id="scrollTopBtn" class="scroll-top" aria-label="Scroll to top">↑</button>
+  <script src="app.js"></script>
+</body>
+</html>
